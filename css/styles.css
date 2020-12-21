@@ -1,0 +1,14 @@
+body {
+  margin: auto;
+  text-align: center;
+  background: #000;
+}
+
+h1 {
+  color: #FFFFFF;
+  text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
+}
+
+#myContainer {
+  margin-top: 100px;
+}
