@@ -1,60 +1,17 @@
+const s = ( sketch ) => {
+  var rockImage;
+  var myGame = new Game();
+  var arrayRocksMaze = [];
 
-var x = 0;
-var myGame = new Game();
-var rocaImage;
-var arrayRocksMaze = [];
-
-function preload(){
-  rocaImage = loadImage('/image/rock.jpg');
-
-}
-
-function setup() {
-  createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage);
-
-  for (let i = 0; i < myGame.rows; i++) {
-    for (let j = 0; j < myGame.columns; j++) {
-      if (myGame.maze[i][j] === 0) {         //Cami
-
-
-      } else if (myGame.maze[i][j] === 1) {  //Roca
-        arrayRocksMaze.push(new Rock(i * myGame.sizeImage, j * myGame.sizeImage));
-
-      } else if (myGame.maze[i][j] === 2) {  //Food
-
-
-      }
-    }
-  }
-}
-
-function draw() {
-  background(000);
-
-  for (var i = 0; i < arrayRocksMaze.length; i++) {
-    console.log("Imprimir una roca:" + i);
-    arrayRocksMaze[i].show();
-  }
-}
-
-/*
-const s = ( p ) => {
-
-
-  p.preload = function() {
-    var rocaImage;
-
-    rocaImage = loadImage('/image/rock.jpg');
+  sketch.preload = function() {
+    rockImage = sketch.loadImage('/image/rock.jpg');
   }
 
-  p.setup = function() {
-    var myGame = new Game();
-    var arrayRocksMaze = [];
+  sketch.setup = function() {
+    sketch.createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage);
 
-    createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage);
-
-    for (let i = 0; i < myGame.rows; i++) {
-      for (let j = 0; j < myGame.columns; j++) {
+    for (var i = 0; i < myGame.rows; i++) {
+      for (var j = 0; j < myGame.columns; j++) {
         if (myGame.maze[i][j] === 0) {         //Cami
 
 
@@ -69,15 +26,14 @@ const s = ( p ) => {
     }
   }
 
-  p.draw = function() {
-    background(51);
+  sketch.draw = function() {
+    sketch.background(51);
 
     for (var i = 0; i < arrayRocksMaze.length; i++) {
       console.log("Imprimir una roca:" + i);
-      arrayRocksMaze[i].show();
+      arrayRocksMaze[i].show(sketch, rockImage);
     }
   }
 }
 
-let myp5 = new p5(s, 'myContainer');
-*/
+var myp5 = new p5(s, 'myContainer');
