@@ -1,8 +1,9 @@
-function Grapes(coordX,coordY) {
-  this.coordX=coordX;
-  this.coordY=coordY;
+class Grapes extends GameObject {
+  constructor(coordX, coordY){
+    super(coordX, coordY);
+  }
 
-  this.show = function(){
-    image(grapeImage, this.coordX, this.coordY);
+  show(sketch, grapeImage) {
+    sketch.image(grapeImage, this.coordX, this.coordY);
   }
 }

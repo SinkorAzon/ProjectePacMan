@@ -1,8 +1,9 @@
-function Food(coordX,coordY) {
-  this.coordX=coordX;
-  this.coordY=coordY;
+class Food extends GameObject {
+  constructor(coordX, coordY){
+    super(coordX, coordY);
+  }
 
-  this.show = function(){
-    image(foodImage, this.coordX, this.coordY);
+  show(sketch, foodImage) {
+    sketch.image(foodImage, this.coordX, this.coordY);
   }
 }
