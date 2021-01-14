@@ -3,7 +3,11 @@ class Rock extends GameObject {
     super(coordX, coordY);
   }
 
-  show(sketch, rockImage) {
-    sketch.image(rockImage, this.coordX, this.coordY);
+  show() {
+    image(rockImage, this.coordX, this.coordY);
+  }
+
+  showInstanceMode(p,img) {
+    p.image(img, this.coordX, this.coordY);
   }
 }

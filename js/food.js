@@ -3,7 +3,11 @@ class Food extends GameObject {
     super(coordX, coordY);
   }
 
-  show(sketch, foodImage) {
-    sketch.image(foodImage, this.coordX, this.coordY);
+  show() {
+    image(foodImage, this.coordX, this.coordY);
+  }
+
+  showInstanceMode(p,img) {
+    p.image(img, this.coordX, this.coordY);
   }
 }
