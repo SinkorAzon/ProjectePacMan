@@ -2,8 +2,11 @@ const s = ( sketch ) => {
   var rockImage;
   var foodImage;
   var pacmanImage;
+  var ghostImage;
   var myGame = new Game();
-  var myPacman = new Pacman(1*myGame.sizeImage, 7*myGame.sizeImage);
+  var myPacman = new Pacman(1*myGame.sizeImage, 12*myGame.sizeImage);
+  var myGhostv1 = new Ghost(12*myGame.sizeImage, 10*myGame.sizeImage);
+  var myGhostv2 = new Ghost(12*myGame.sizeImage, 14*myGame.sizeImage);
   var arrayRockMaze = [];
   var arrayFoodMaze = [];
 
@@ -11,6 +14,7 @@ const s = ( sketch ) => {
     rockImage = sketch.loadImage('/image/rock.jpg');
     foodImage = sketch.loadImage('/image/food.png');
     pacmanImage = sketch.loadImage('/image/pacman.gif');
+    ghostImage = sketch.loadImage('/image/ghost.png');
   }
 
   sketch.setup = function() {
@@ -45,6 +49,8 @@ const s = ( sketch ) => {
       arrayFoodMaze[i].showInstanceMode(sketch, foodImage);
     }
     myPacman.showInstanceMode(sketch, pacmanImage);
+    myGhostv1.showInstanceMode(sketch, ghostImage);
+    myGhostv2.showInstanceMode(sketch, ghostImage);
     movePacman();
   }
 
@@ -72,7 +78,7 @@ const s = ( sketch ) => {
 
         break;
       case 4: //Down
-        
+
         break;
       default:
 
