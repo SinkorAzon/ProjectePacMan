@@ -1,14 +1,16 @@
 const s = ( sketch ) => {
   var rockImage;
   var foodImage;
+  var pacmanImage;
   var myGame = new Game();
+  var myPacman = new Pacman(1*myGame.sizeImage, 7*myGame.sizeImage);
   var arrayRockMaze = [];
-
   var arrayFoodMaze = [];
 
   sketch.preload = function() {
     rockImage = sketch.loadImage('/image/rock.jpg');
     foodImage = sketch.loadImage('/image/food.png');
+    pacmanImage = sketch.loadImage('/image/pacman.gif');
   }
 
   sketch.setup = function() {
@@ -28,30 +30,51 @@ const s = ( sketch ) => {
         }
       }
     }
-  }
+  };
 
   sketch.draw = function() {
-    sketch.background(51);
+    sketch.background(11);
 
     for (var i = 0; i < arrayRockMaze.length; i++) {
-      console.log("Imprimir una roca:" + i);
+      //console.log("Imprimir una roca:" + i);
       arrayRockMaze[i].showInstanceMode(sketch, rockImage);
     }
 
     for (var i = 0; i < arrayFoodMaze.length; i++) {
-      console.log("Imprimir una bola:" + i);
+      //console.log("Imprimir una bola:" + i);
       arrayFoodMaze[i].showInstanceMode(sketch, foodImage);
     }
+    myPacman.showInstanceMode(sketch, pacmanImage);
+    movePacman();
   }
 
   sketch.keyPressed = function() {
-    if(key === 'a' || keyCode === LEFT_ARROW) {
+    if(sketch.keyCode === sketch.LEFT_ARROW) {
+      myPacman.moveLeft();
+    } else if(sketch.keyCode === sketch.RIGHT_ARROW) {
+      myPacman.moveRight();
+    } else if(sketch.keyCode === sketch.UP_ARROW) {
+      myPacman.moveUp();
+    } else if(sketch.keyCode === sketch.DOWN_ARROW) {
+      myPacman.moveDown();
+    }
+  }
 
-    } else if(key === 'd' || keyCode === RIGHT_ARROW) {
+  function movePacman() {
+    switch (myPacman.direction) {
+      case 1: //Left
 
-    } else if(key === 'w' || keyCode === UP_ARROW) {
+        break;
+      case 2: //Right
 
-    } else if(key === 's' || keyCode === DOWN_ARROW) {
+        break;
+      case 3: //Up
+
+        break;
+      case 4: //Down
+        
+        break;
+      default:
 
     }
   }
