@@ -1,10 +1,10 @@
-class Food extends GameObject {
+class Pacdot extends GameObject {
   constructor(coordX, coordY){
     super(coordX, coordY);
   }
 
   show() {
-    image(foodImage, this.coordX, this.coordY);
+    image(pacdotImage, this.coordX, this.coordY);
   }
 
   showInstanceMode(p, img) {
