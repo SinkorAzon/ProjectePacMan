@@ -1,4 +1,6 @@
 const s = ( sketch ) => {
+  const HEIGHT_TEXT = 35;
+  var timeGame = 180;
   var rockImage;
   var foodImage;
   var pacdotImage;
@@ -14,6 +16,11 @@ const s = ( sketch ) => {
   var arrayRockMaze = [];
   var arrayFoodMaze = [];
   var arrayPacdotMaze = [];
+  var mySoundGameOver;
+  var mySoundStartGame;
+  var mySoundGameOver;
+  var mySoundMove;
+  var mySoundEat;
 
   sketch.preload = function() {
     rockImage = sketch.loadImage('/image/rock.jpg');
@@ -24,10 +31,16 @@ const s = ( sketch ) => {
     pacmanImageUp = sketch.loadImage('/image/pacmanUp.gif');
     ghostImage = sketch.loadImage('/image/ghost.png');
     pacdotImage = sketch.loadImage('/image/pacdot.png');
+    soundFormats('mp3', 'ogg');
+    mySoundGameOver = loadSound('/assets/Death.mp3');
+    mySoundStartGame = loadSound('/assets/Intro.mp3');
+    mySoundEat = loadSound('/assets/Fruit.mp3');
+    mySoundMove = loadSound('/assets/Chomp.mp3');
   }
 
   sketch.setup = function() {
-    sketch.createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage);
+    sketch.createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage + HEIGHT_TEXT);
+
 
     for (var i = 0; i < myGame.rows; i++) {
       for (var j = 0; j < myGame.columns; j++) { //Pacdot
@@ -46,25 +59,42 @@ const s = ( sketch ) => {
   };
 
   sketch.draw = function() {
-    sketch.background(11);
+    sketch.background(0);
 
-    for (var i = 0; i < arrayPacdotMaze.length; i++) {
+    for (let i = 0; i < arrayPacdotMaze.length; i++) {
       console.log("Imprimir una pacdot:" + i);
       arrayPacdotMaze[i].showInstanceMode(sketch, pacdotImage);
+      //Eat Pacdot and Delete Food
+      if(myPacman.testCollidePacdot(sketch, arrayPacdotMaze[i])){
+        arrayPacdotMaze.splice(i, 1);
+        myPacman.score = myPacman.score + 10;
+      } else {
+        console.log("Don't collide with the Pacdot");
+      }
     }
 
-    for (var i = 0; i < arrayRockMaze.length; i++) {
+    for (let i = 0; i < arrayRockMaze.length; i++) {
       console.log("Imprimir una roca:" + i);
       arrayRockMaze[i].showInstanceMode(sketch, rockImage);
+      myPacman.testCollideRock(sketch, arrayRockMaze[i]);
     }
 
-    for (var i = 0; i < arrayFoodMaze.length; i++) {
+    for (let i = 0; i < arrayFoodMaze.length; i++) {
       console.log("Imprimir una bola:" + i);
       arrayFoodMaze[i].showInstanceMode(sketch, foodImage);
+      //Eat Food and Delete Food
+      if(myPacman.testCollideFood(sketch, arrayFoodMaze[i])){
+        arrayFoodMaze.splice(i, 1);
+        myPacman.score = myPacman.score + 100;
+      } else {
+        console.log("Don't collide with the Food");
+      }
     }
+
     showPacman();
     myGhostv1.showInstanceMode(sketch, ghostImage);
     myGhostv2.showInstanceMode(sketch, ghostImage);
+    showScore();
   }
 
   sketch.keyPressed = function() {
@@ -102,6 +132,22 @@ const s = ( sketch ) => {
         break;
       default:
 
+    }
+  }
+
+  function showScore(){
+    sketch.textSize(24);
+    sketch.fill(255);
+    sketch.text('Score :', 10, 830);
+    sketch.text(myPacman.score, 120, 830);
+    sketch.text('Time :', 650, 830);
+    if(sketch.frameCount % 60 == 0 && timeGame != 0) {
+      timeGame--;
+    }
+    sketch.text(timeGame, 730, 830);
+    if(timeGame == 0) {
+      sketch.text("Game Over", 330, 830);
+      mySoundGameOver.play();
     }
   }
 }
