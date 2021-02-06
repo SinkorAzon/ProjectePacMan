@@ -3,7 +3,7 @@ class Pacman extends GameObject {
     super(coordX, coordY);
     this.direction = 1; //Left-1, Right-2, Up-3, Down-4
     this.speed = 32;
-    this.live = 3;
+    this.lives = 5;
     this.score = 0;
   }
 
@@ -15,8 +15,8 @@ class Pacman extends GameObject {
     this.direction = 1;
     this.coordX = this.coordX + this.speed;
 
-    if(this.coordX > widthGame - (this.speed * 2)) {
-      this.coordX = widthGame - (this.speed * 2);
+    if(this.coordX > widthGame - this.speed) {
+      this.coordX = widthGame - this.speed;
     } else {
       console.log("Move Right OK");
     }
@@ -26,8 +26,8 @@ class Pacman extends GameObject {
     this.direction = 2;
     this.coordX = this.coordX - this.speed;
 
-    if(this.coordX <= 0 + this.speed) {
-      this.coordX = 0 + this.speed;
+    if(this.coordX <= 0) {
+      this.coordX = 0;
     } else {
       console.log("Move Left OK");
     }
@@ -37,8 +37,8 @@ class Pacman extends GameObject {
     this.direction = 3;
     this.coordY = this.coordY - this.speed;
 
-    if(this.coordY <= 0 + this.speed) {
-      this.coordY = 0 + this.speed;
+    if(this.coordY <= 0) {
+      this.coordY = 0;
     } else {
       console.log("Move Up OK");
     }
@@ -48,8 +48,8 @@ class Pacman extends GameObject {
     this.direction = 4;
     this.coordY = this.coordY + this.speed;
 
-    if(this.coordY > heightGame - (this.speed * 2)) {
-      this.coordY = heightGame - (this.speed * 2);
+    if(this.coordY > heightGame - this.speed) {
+      this.coordY = heightGame - this.speed;
     } else {
       console.log("Move Down OK");
     }
@@ -61,15 +61,47 @@ class Pacman extends GameObject {
       switch (this.direction) {
         case 1: //Right
           this.coordX = this.coordX - this.speed;
+          if(this.lives != 0) {
+            this.lives = this.lives - 1;
+          }
+          if(this.score != 0) {
+            this.score = this.score - 100;
+          } else {
+            this.score = 0;
+          }
           break;
         case 2: //Left
           this.coordX = this.coordX + this.speed;
+          if(this.lives != 0) {
+            this.lives = this.lives - 1;
+          }
+          if(this.score != 0) {
+            this.score = this.score - 100;
+          } else {
+            this.score = 0;
+          }
           break;
         case 3: //Up
           this.coordY = this.coordY + this.speed;
+          if(this.lives != 0) {
+            this.lives = this.lives - 1;
+          }
+          if(this.score != 0) {
+            this.score = this.score - 100;
+          } else {
+            this.score = 0;
+          }
           break;
         case 4: //Down
           this.coordY = this.coordY - this.speed;
+          if(this.lives != 0) {
+            this.lives = this.lives - 1;
+          }
+          if(this.score != 0) {
+            this.score = this.score - 100;
+          } else {
+            this.score = 0;
+          }
           break;
         default:
 
@@ -95,5 +127,10 @@ class Pacman extends GameObject {
     } else {
       return false;
     }
+  }
+
+  testCollideGhost(sketch, ghost){
+    let distance = sketch.dist(this.coordX, this.coordY, ghost.coordX, ghost.coordY);
+    this.lives = 0;
   }
 }
