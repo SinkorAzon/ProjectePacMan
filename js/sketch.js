@@ -1,7 +1,7 @@
 const s = ( sketch ) => {
   const HEIGHT_TEXT = 35;
   var timeGame = 180;
-  var timeOver = 5;
+  var fr = 60; //starting FPS
   var rockImage;
   var foodImage;
   var pacdotImage;
@@ -41,7 +41,12 @@ const s = ( sketch ) => {
 
   sketch.setup = function() {
     sketch.createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage + HEIGHT_TEXT);
+    sketch.frameRate(fr); // Attempt to refresh at starting FPS
+    fillMap();
+  };
 
+  function fillMap(){
+    mySoundStartGame.play();
     for (var i = 0; i < myGame.rows; i++) {
       for (var j = 0; j < myGame.columns; j++) { //Pacdot
         if (myGame.maze[i][j] === 0) {
@@ -56,32 +61,32 @@ const s = ( sketch ) => {
         }
       }
     }
-  };
+  }
 
   sketch.draw = function() {
     sketch.background(0);
-    //startGame();
 
     for (let i = 0; i < arrayPacdotMaze.length; i++) {
-      console.log("Imprimir una pacdot:" + i);
+      //console.log("Imprimir una pacdot:" + i);
       arrayPacdotMaze[i].showInstanceMode(sketch, pacdotImage);
       //Eat Pacdot and Delete Food
       if(myPacman.testCollidePacdot(sketch, arrayPacdotMaze[i])){
         arrayPacdotMaze.splice(i, 1);
         myPacman.score = myPacman.score + 10;
+        mySoundEat.play();
       } else {
-        console.log("Don't collide with the Pacdot");
+        //console.log("Don't collide with the Pacdot");
       }
     }
 
     for (let i = 0; i < arrayRockMaze.length; i++) {
-      console.log("Imprimir una roca:" + i);
+      //console.log("Imprimir una roca:" + i);
       arrayRockMaze[i].showInstanceMode(sketch, rockImage);
       myPacman.testCollideRock(sketch, arrayRockMaze[i]);
     }
 
     for (let i = 0; i < arrayFoodMaze.length; i++) {
-      console.log("Imprimir una bola:" + i);
+      //console.log("Imprimir una bola:" + i);
       arrayFoodMaze[i].showInstanceMode(sketch, foodImage);
       //Eat Food and Delete Food
       if(myPacman.testCollideFood(sketch, arrayFoodMaze[i])){
@@ -89,7 +94,7 @@ const s = ( sketch ) => {
         myPacman.score = myPacman.score + 100;
         mySoundEat.play();
       } else {
-        console.log("Don't collide with the Food");
+        //console.log("Don't collide with the Food");
       }
     }
 
@@ -160,29 +165,41 @@ const s = ( sketch ) => {
     sketch.text(timeGame, 730, 830);
   }
 
-  function startGame(){
-    mySoundStartGame.play();
-    sketch.noLoop();
-  }
-
   function playerLose(){
     if(timeGame == 0 || myPacman.lives == 0) {
-      sketch.textSize(30);
-      sketch.text("Game Over", 320, 410);
       mySoundGameOver.play();
-      sketch.noLoop();
+      let miss = "Game Over!\nVols tornar a jugar?";
+      var continuar = confirm(miss);
+      if(continuar == true){
+        sketch.noLoop();
+        restartGame();
+      }
     }
   }
 
   function playerWin() {
     if(timeGame > 0){
-      if(myPacman.lives > 0 && arrayPacdotMaze == 0 && arrayFoodMaze == 0){
-        sketch.textSize(30);
-        sketch.text("You Win!!!", 330, 410);
+      if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
         mySoundStartGame.play();
-        sketch.noLoop();
+        let miss = "Enhorabona has guanyat!!\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
+        var continuar = confirm(miss);
+        if(continuar == true){
+          sketch.noLoop();
+          restartGame();
+        }
       }
     }
+  }
+
+  function restartGame(){
+    sketch.clear();
+    myPacman.coordX = 12 * myGame.sizeImage;
+    myPacman.coordY = 12 * myGame.sizeImage;
+    myPacman.lives = 5;
+    myPacman.score = 0;
+    timeGame = 180;
+    fillMap();
+    sketch.loop();
   }
 }
 
