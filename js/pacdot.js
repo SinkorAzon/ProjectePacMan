@@ -1,13 +1,13 @@
-class Rock extends GameObject {
+class Pacdot extends GameObject {
   constructor(coordX, coordY){
     super(coordX, coordY);
   }
 
   show() {
-    image(rockImage, this.coordX, this.coordY);
+    image(pacdotImage, this.coordX, this.coordY);
   }
 
-  showInstanceMode(p,img) {
+  showInstanceMode(p, img) {
     p.image(img, this.coordX, this.coordY);
   }
 }

@@ -1,13 +1,13 @@
-class Rock extends GameObject {
+class Food extends GameObject {
   constructor(coordX, coordY){
     super(coordX, coordY);
   }
 
   show() {
-    image(rockImage, this.coordX, this.coordY);
+    image(foodImage, this.coordX, this.coordY);
   }
 
-  showInstanceMode(p,img) {
+  showInstanceMode(p, img) {
     p.image(img, this.coordX, this.coordY);
   }
 }
