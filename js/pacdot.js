@@ -1,6 +1,7 @@
 class Pacdot extends GameObject {
   constructor(coordX, coordY){
     super(coordX, coordY);
+    this.score = 10;
   }
 
   show() {

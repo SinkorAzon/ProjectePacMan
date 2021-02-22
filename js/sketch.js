@@ -42,6 +42,7 @@ const s = ( sketch ) => {
   sketch.setup = function() {
     sketch.createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage + HEIGHT_TEXT);
     sketch.frameRate(fr); // Attempt to refresh at starting FPS
+
     fillMap();
   };
 
@@ -61,6 +62,7 @@ const s = ( sketch ) => {
         }
       }
     }
+
   }
 
   sketch.draw = function() {
@@ -71,8 +73,9 @@ const s = ( sketch ) => {
       arrayPacdotMaze[i].showInstanceMode(sketch, pacdotImage);
       //Eat Pacdot and Delete Food
       if(myPacman.testCollidePacdot(sketch, arrayPacdotMaze[i])){
+        myPacman.score = myPacman.score + arrayPacdotMaze[i].score;
         arrayPacdotMaze.splice(i, 1);
-        myPacman.score = myPacman.score + 10;
+
         mySoundEat.play();
       } else {
         //console.log("Don't collide with the Pacdot");
@@ -97,8 +100,9 @@ const s = ( sketch ) => {
         //console.log("Don't collide with the Food");
       }
     }
-
-    showPacman();
+    if(!mySoundStartGame.isPlaying()){
+      showPacman();
+    }
     myGhostv1.showInstanceMode(sketch, ghostImage);
     myGhostv2.showInstanceMode(sketch, ghostImage);
     showStatusGame();
