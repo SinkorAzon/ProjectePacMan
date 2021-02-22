@@ -1,6 +1,7 @@
 class Food extends GameObject {
   constructor(coordX, coordY){
     super(coordX, coordY);
+    this.score = 100;
   }
 
   show() {
