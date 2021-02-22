@@ -63,6 +63,7 @@ class Pacman extends GameObject {
           this.coordX = this.coordX - this.speed;
           if(this.lives != 0) {
             this.lives = this.lives - 1;
+            //alert("¡¡ -1 Vida !!\nVides restants " + this.lives + ".");
           }
           if(this.score != 0) {
             this.score = this.score - 100;
@@ -74,6 +75,7 @@ class Pacman extends GameObject {
           this.coordX = this.coordX + this.speed;
           if(this.lives != 0) {
             this.lives = this.lives - 1;
+            //alert("¡¡ -1 Vida !!\nVides restants " + this.lives + ".");
           }
           if(this.score != 0) {
             this.score = this.score - 100;
@@ -85,6 +87,7 @@ class Pacman extends GameObject {
           this.coordY = this.coordY + this.speed;
           if(this.lives != 0) {
             this.lives = this.lives - 1;
+            //alert("¡¡ -1 Vida !!\nVides restants " + this.lives + ".");
           }
           if(this.score != 0) {
             this.score = this.score - 100;
@@ -96,6 +99,7 @@ class Pacman extends GameObject {
           this.coordY = this.coordY - this.speed;
           if(this.lives != 0) {
             this.lives = this.lives - 1;
+            //alert("¡¡ -1 Vida !!\nVides restants " + this.lives + ".");
           }
           if(this.score != 0) {
             this.score = this.score - 100;
