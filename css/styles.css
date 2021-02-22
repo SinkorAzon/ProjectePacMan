@@ -1,8 +1,7 @@
 body {
   margin: auto;
   text-align: center;
-  background: #000;
-
+  background-image: url('/image/backimg.jpg');
 }
 
 h1 {

@@ -24,19 +24,19 @@ const s = ( sketch ) => {
   var mySoundEat;
 
   sketch.preload = function() {
-    rockImage = sketch.loadImage('/image/rock.jpg');
-    foodImage = sketch.loadImage('/image/food.png');
-    pacmanImageRight = sketch.loadImage('/image/pacmanRight.gif');
-    pacmanImageLeft = sketch.loadImage('/image/pacmanLeft.gif');
-    pacmanImageDown = sketch.loadImage('/image/pacmanDown.gif');
-    pacmanImageUp = sketch.loadImage('/image/pacmanUp.gif');
-    ghostImage = sketch.loadImage('/image/ghost.png');
-    pacdotImage = sketch.loadImage('/image/pacdot.png');
+    rockImage = sketch.loadImage('image/rock.jpg');
+    foodImage = sketch.loadImage('image/food.png');
+    pacmanImageRight = sketch.loadImage('image/pacmanRight.gif');
+    pacmanImageLeft = sketch.loadImage('image/pacmanLeft.gif');
+    pacmanImageDown = sketch.loadImage('image/pacmanDown.gif');
+    pacmanImageUp = sketch.loadImage('image/pacmanUp.gif');
+    ghostImage = sketch.loadImage('image/ghost.png');
+    pacdotImage = sketch.loadImage('image/pacdot.png');
     sketch.soundFormats('mp3', 'ogg');
-    mySoundGameOver = sketch.loadSound('/assets/Death.mp3');
-    mySoundStartGame = sketch.loadSound('/assets/Intro.mp3');
-    mySoundEat = sketch.loadSound('/assets/Fruit.mp3');
-    mySoundMove = sketch.loadSound('/assets/Chomp.mp3');
+    mySoundGameOver = sketch.loadSound('assets/Death.mp3');
+    mySoundStartGame = sketch.loadSound('assets/Intro.mp3');
+    mySoundEat = sketch.loadSound('assets/Fruit.mp3');
+    mySoundMove = sketch.loadSound('assets/Chomp.mp3');
   }
 
   sketch.setup = function() {
