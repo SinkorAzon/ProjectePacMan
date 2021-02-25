@@ -1,35 +1,59 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <script src="js/gameobject.js"></script>
-    <script src="js/game.js"></script>
-    <script src="js/rock.js"></script>
-    <script src="js/food.js"></script>
-    <script src="js/grapes.js"></script>
-    <script src="js/pacman.js"></script>
-    <script src="js/ghost.js"></script>
-    <script src="js/pacdot.js"></script>
-
-    <script src="js/library/p5.js"></script>
-    <script src="js/library/p5-test.js"></script>
-    <script src="js/library/p5.min.js"></script>
-    <script src="js/library/p5.pre-min.js"></script>
-    <script src="js/library/p5.sound.js"></script>
-    <script src="js/library/p5.sound.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <script src="js/inf.js" type="text/javascript"></script>
-    <script src="js/sketch.js"></script>
   </head>
   <body style="background-image: url('image/backimg.jpg')">
-    <div class="cont">
+    <div class="title">
       <h1>Game PacMan</h1>
     </div>
-    <div class="informacio">
+    <div class="btn">
       <input type="image" name="infoButton" src="image/info.png" alt="Info" onclick="info();">
     </div>
-    <div id="myContainer">
-    </div>
+    <br><br>
+    <form action="pacman.html">
+    <table>
+      <tr>
+        <td>
+          <label for="user">Usuari</label>
+        </td>
+        <td>
+          <input type="text" id="user" name="user"></input>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="email">Email</label>
+        </td>
+        <td>
+          <input type="text" id="email" name="email"></input>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="dif">Dificultat :</label>
+        </td>
+        <td>
+
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label for="dif">Mode Easy</label>
+          <input type="radio" name="dif" id="easy" value="0"><br>
+          <label for="dif">Mode Normal</label>
+          <input type="radio" name="dif" id="norm" value="1" checked><br>
+          <label for="dif">Mode Hard</label>
+          <input type="radio" name="dif" id="hard" value="2"><br>
+          <label for="dif">Mode Hell</label>
+          <input type="radio" name="dif" id="easy" value="3">
+        </td>
+      </tr>
+    </table>
+    <!--onclick="window.location.href='pacman.html'"-->
+    <input type="image" name="startButton" src="image/start.webp" alt="Game"></input>
   </body>
 </html>

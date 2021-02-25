@@ -1,31 +1,65 @@
 body {
   margin: auto;
   text-align: center;
+  color: #FFFFFF;
 }
 
 h1 {
-  color: #FFFFFF;
   text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
-  float: left;
 }
 
-img {
-  width: 300px;
-}
-
-.cont {
-  display: inline-block;
+.title {
   text-align: center;
 }
 
-.informacio {
-  float: right;
+.btn {
+  position: fixed;
+  top: 0;
+  right: 0;
   display: inline;
-  margin: auto auto auto auto;
+}
+
+table {
+  text-align: center;
+  margin: auto;
+}
+
+label {
+  font-weight: bold;
 }
 
 input[name="infoButton"] {
+  margin-right: 5px;
+  margin-top: 5px;
   width: 50px;
   height: 50px;
   border-radius: 30px;
+}
+
+input[name="restartButton"] {
+  margin-right: 5px;
+  margin-top: 5px;
+  width: 70px;
+  height: 50px;
+}
+
+input[name="startButton"] {
+  margin-top: 100px;
+  width: 300px;
+  height: 300px;
+  border-radius: 30px;
+}
+
+input[name="returnButton"] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-right: 5px;
+  margin-top: 5px;
+  width: 50px;
+  height: 50px;
+}
+
+#myContainer {
+  text-align: center;
 }
