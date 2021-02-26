@@ -238,7 +238,6 @@ const s = ( sketch ) => {
     sketch.textSize(24);
     sketch.fill(255);
     let dificultat;
-    ;
 
     sketch.text('Score :', 10, 825);
     sketch.text(myPacman.score, 120, 825);
@@ -249,9 +248,11 @@ const s = ( sketch ) => {
     sketch.text(difMode(dificultat), 400, 825);
 
     sketch.text('Time :', 650, 825);
-    if(sketch.frameCount % fr == 0 && timeGame != 0) {
-      timeGame--;
-    }
+    if(!mySoundStartGame.isPlaying()){
+      if(sketch.frameCount % fr == 0 && timeGame != 0) {
+        timeGame--;
+      }
+    }    
     sketch.text(timeGame, 730, 825);
     sketch.textSize(14);
     sketch.text("© Game Created By Eric Quintana", 300, 850);
@@ -274,12 +275,20 @@ const s = ( sketch ) => {
 
   function playerWin() {
     let dificultat;
-    difMode(dificultat);
+
+    if(user == ""){
+      user = "Anonymous";
+    }
+
+    if(email == ""){
+      email = "anonymous@randomail.pacman"
+    }
 
     if(timeGame > 0){
-      if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
+      //if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
+      if(myPacman.lives > 0 && myPacman.score >= 100){
         mySoundWinGame.play();
-        let miss = "Enhorabona has guanyat " + user + "!!\nEmail = " + email + "\nDificultat = " + dificultat + "\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
+        let miss = "Enhorabona has guanyat " + user + "!!\nEmail = " + email + "\nDificultat = " + difMode(dificultat) + "\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
         var continuar = confirm(miss);
         if(continuar == true){
           sketch.noLoop();
