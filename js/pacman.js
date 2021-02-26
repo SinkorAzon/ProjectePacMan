@@ -18,7 +18,7 @@ class Pacman extends GameObject {
     if(this.coordX > widthGame - this.speed) {
       this.coordX = widthGame - this.speed;
     } else {
-      console.log("Move Right OK");
+      //console.log("Move Right OK");
     }
   }
 
@@ -29,7 +29,7 @@ class Pacman extends GameObject {
     if(this.coordX <= 0) {
       this.coordX = 0;
     } else {
-      console.log("Move Left OK");
+      //console.log("Move Left OK");
     }
   }
 
@@ -40,7 +40,7 @@ class Pacman extends GameObject {
     if(this.coordY <= 0) {
       this.coordY = 0;
     } else {
-      console.log("Move Up OK");
+      //console.log("Move Up OK");
     }
   }
 
@@ -51,7 +51,7 @@ class Pacman extends GameObject {
     if(this.coordY > heightGame - this.speed) {
       this.coordY = heightGame - this.speed;
     } else {
-      console.log("Move Down OK");
+      //console.log("Move Down OK");
     }
   }
 
@@ -111,7 +111,7 @@ class Pacman extends GameObject {
 
       }
     } else {
-      console.log("Don't collide with the Rock");
+      //console.log("Don't collide with the Rock");
     }
   }
 
@@ -135,6 +135,10 @@ class Pacman extends GameObject {
 
   testCollideGhost(sketch, ghost){
     let distance = sketch.dist(this.coordX, this.coordY, ghost.coordX, ghost.coordY);
-    this.lives = 0;
+    if(distance < 32){
+      return true;
+    } else {
+      return false;
+    }
   }
 }
