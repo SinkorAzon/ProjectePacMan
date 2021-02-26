@@ -1,5 +1,5 @@
 const s = ( sketch ) => {
-  const HEIGHT_TEXT = 35;
+  const HEIGHT_TEXT =55;
   var timeGame;
   var fr = 30; //starting FPS
   var rockImage;
@@ -22,6 +22,11 @@ const s = ( sketch ) => {
   var mySoundGameOver;
   var mySoundMove;
   var mySoundEat;
+  var url = window.location.search;
+  var urlParams = new URLSearchParams(url);
+  var dif = urlParams.get('dif');
+  var user = urlParams.get("user");
+  var email = urlParams.get('email');
 
   sketch.preload = function() {
     rockImage = sketch.loadImage('image/rock.jpg');
@@ -49,10 +54,6 @@ const s = ( sketch ) => {
   };
 
   function startGame(){
-    let url = window.location.search;
-    let urlParams = new URLSearchParams(url);
-    let dif = urlParams.get('dif');
-
     switch (dif) {
       case "0":
         timeGame = 300;
@@ -148,6 +149,7 @@ const s = ( sketch ) => {
         arrayCherryMaze.splice(i, 1);
         myPacman.score = myPacman.score + 250;
         myPacman.lives = myPacman.lives + 1;
+        timeGame = timeGame + 10;
         mySoundEat.play();
       } else {
         //console.log("Don't collide with the Food");
@@ -172,19 +174,20 @@ const s = ( sketch ) => {
   sketch.keyPressed = function() {
     let widthGame = myGame.columns * myGame.sizeImage;
     let heightGame = myGame.rows * myGame.sizeImage;
-
-    if(sketch.keyCode === sketch.LEFT_ARROW) {
-      myPacman.moveLeft(widthGame);
-      mySoundMove.play();
-    } else if(sketch.keyCode === sketch.RIGHT_ARROW) {
-      myPacman.moveRight(widthGame);
-      mySoundMove.play();
-    } else if(sketch.keyCode === sketch.UP_ARROW) {
-      myPacman.moveUp(heightGame);
-      mySoundMove.play();
-    } else if(sketch.keyCode === sketch.DOWN_ARROW) {
-      myPacman.moveDown(heightGame);
-      mySoundMove.play();
+    if(!mySoundStartGame.isPlaying()){
+      if(sketch.keyCode === sketch.LEFT_ARROW) {
+        myPacman.moveLeft(widthGame);
+        mySoundMove.play();
+      } else if(sketch.keyCode === sketch.RIGHT_ARROW) {
+        myPacman.moveRight(widthGame);
+        mySoundMove.play();
+      } else if(sketch.keyCode === sketch.UP_ARROW) {
+        myPacman.moveUp(heightGame);
+        mySoundMove.play();
+      } else if(sketch.keyCode === sketch.DOWN_ARROW) {
+        myPacman.moveDown(heightGame);
+        mySoundMove.play();
+      }
     }
   }
 
@@ -211,21 +214,47 @@ const s = ( sketch ) => {
     }
   }
 
+  function difMode(dificultat){
+    switch (dif) {
+      case "0":
+        dificultat = "Mode Easy";
+        break;
+      case "1":
+        dificultat = "Mode Standard";
+        break;
+      case "2":
+        dificultat = "Mode Hard ☠";
+        break;
+      case "3":
+        dificultat = "Mode Hell ☠ ☠ ☠";
+        break;
+      default:
+
+    }
+    return dificultat;
+  }
+
   function showStatusGame(){
     sketch.textSize(24);
     sketch.fill(255);
+    let dificultat;
+    ;
 
-    sketch.text('Score :', 10, 830);
-    sketch.text(myPacman.score, 120, 830);
+    sketch.text('Score :', 10, 825);
+    sketch.text(myPacman.score, 120, 825);
 
-    sketch.text('Lives :', 310, 830);
-    sketch.text(myPacman.lives + " ♥", 393, 830);
+    sketch.text('Lives :', 210, 825);
+    sketch.text(myPacman.lives + " ♥", 293, 825);
 
-    sketch.text('Time :', 650, 830);
+    sketch.text(difMode(dificultat), 400, 825);
+
+    sketch.text('Time :', 650, 825);
     if(sketch.frameCount % fr == 0 && timeGame != 0) {
       timeGame--;
     }
-    sketch.text(timeGame, 730, 830);
+    sketch.text(timeGame, 730, 825);
+    sketch.textSize(14);
+    sketch.text("© Game Created By Eric Quintana", 300, 850);
   }
 
   function playerLose(){
@@ -236,7 +265,7 @@ const s = ( sketch ) => {
       if(continuar == true){
         sketch.noLoop();
         mySoundGameOver.addCue(mySoundGameOver.duration() - 0.01, restartGame);
-        //restartGame();
+        restartGame();
       } else {
           window.history.back();
       }
@@ -244,30 +273,8 @@ const s = ( sketch ) => {
   }
 
   function playerWin() {
-    let url = window.location.search;
-    //console.log(url);
-    let urlParams = new URLSearchParams(url);
-    user = urlParams.get("user");
-    email = urlParams.get('email');
-    dif = urlParams.get('dif');
     let dificultat;
-
-    switch (dif) {
-      case "0":
-        dificultat = "Mode Easy";
-        break;
-      case "1":
-        dificultat = "Mode Normal";
-        break;
-      case "2":
-        dificultat = "Mode Hard";
-        break;
-      case "3":
-        dificultat = "Mode Hell";
-        break;
-      default:
-
-    }
+    difMode(dificultat);
 
     if(timeGame > 0){
       if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
@@ -277,7 +284,9 @@ const s = ( sketch ) => {
         if(continuar == true){
           sketch.noLoop();
           mySoundStartGame.addCue(mySoundStartGame.duration() - 0.01, restartGame);
-          //restartGame();
+          restartGame();
+        } else {
+          window.history.back();
         }
       }
     }
