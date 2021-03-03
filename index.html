@@ -14,46 +14,47 @@
       <input type="image" name="infoButton" src="image/info.png" alt="Info" onclick="info();">
     </div>
     <br><br>
-    <form action="pacman.html">
-    <table>
-      <tr>
-        <td>
-          <label for="user">Usuari</label>
-        </td>
-        <td>
-          <input type="text" id="user" name="user"></input>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="email">Email</label>
-        </td>
-        <td>
-          <input type="text" id="email" name="email"></input>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label for="dif">Dificultat :</label>
-        </td>
-        <td>
+    <form action="pacman.html" onsubmit="saveUser();" method="get">
+      <table>
+        <tr>
+          <td>
+            <label for="user">Usuari</label>
+          </td>
+          <td>
+            <input type="text" id="user" name="user"></input>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="email">Email</label>
+          </td>
+          <td>
+            <input type="text" id="email" name="email"></input>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="dif">Dificultat :</label>
+          </td>
+          <td>
 
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <label for="dif">Mode Easy</label>
-          <input type="radio" name="dif" id="easy" value="0"><br>
-          <label for="dif">Mode Normal</label>
-          <input type="radio" name="dif" id="stan" value="1" checked><br>
-          <label for="dif">Mode Standard</label>
-          <input type="radio" name="dif" id="hard" value="2"><br>
-          <label for="dif">Mode Hell</label>
-          <input type="radio" name="dif" id="easy" value="3">
-        </td>
-      </tr>
-    </table>
-    <!--onclick="window.location.href='pacman.html'"-->
-    <input type="image" name="startButton" src="image/start.webp" alt="Game"></input>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="dif">Mode Easy</label>
+            <input type="radio" name="dif" id="easy" value="0"><br>
+            <label for="dif">Mode Normal</label>
+            <input type="radio" name="dif" id="stan" value="1" checked><br>
+            <label for="dif">Mode Standard</label>
+            <input type="radio" name="dif" id="hard" value="2"><br>
+            <label for="dif">Mode Hell</label>
+            <input type="radio" name="dif" id="hell" value="3">
+          </td>
+        </tr>
+      </table>
+      <!--onclick="window.location.href='pacman.html'"-->
+      <input type="image" name="startButton" src="image/start.webp" alt="Game" onclick="saveUser();"></input>
+    </form>
   </body>
 </html>

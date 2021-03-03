@@ -33,3 +33,24 @@ function infGame(){
       "Mode Hell = 1 Vida + 90 seg\n"
     );
 }
+
+function saveUser(){
+  var user = document.getElementById("user").value;
+  var email = document.getElementById("email").value;
+  var dif;
+  if(document.getElementById("easy").checked == true) {
+    dif = document.getElementById("easy").value;
+  } else if(document.getElementById("stan").checked == true) {
+    dif = document.getElementById("stan").value;
+  } else if(document.getElementById("hard").checked == true) {
+    dif = document.getElementById("stan").value;
+  } else if(document.getElementById("hell").checked == true) {
+    dif = document.getElementById("hell").value;
+  }
+
+
+  //Save Inf user
+  localStorage.setItem('nomUsuariKey', user);
+  localStorage.setItem('emailKey', email);
+  localStorage.setItem('difKey', dif);
+}

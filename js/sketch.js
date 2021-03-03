@@ -27,6 +27,9 @@ const s = ( sketch ) => {
   var dif = urlParams.get('dif');
   var user = urlParams.get("user");
   var email = urlParams.get('email');
+  var nomUsuariK = localStorage.getItem("nomUsuariKey");
+  var emailK = localStorage.getItem("emailKey");
+  var difK = localStorage.getItem("difKey");
 
   sketch.preload = function() {
     rockImage = sketch.loadImage('image/rock.jpg');
@@ -49,7 +52,7 @@ const s = ( sketch ) => {
   sketch.setup = function() {
     sketch.createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage + HEIGHT_TEXT);
     sketch.frameRate(fr); // Attempt to refresh at starting FPS
-
+    console.log(nomUsuariK + " / " + emailK + " / " + difK);
     startGame();
   };
 
@@ -58,22 +61,22 @@ const s = ( sketch ) => {
       case "0":
         timeGame = 300;
         myPacman.lives = 10;
-        console.log("0");
+        //console.log("0");
         break;
       case "1":
         timeGame = 180;
         myPacman.lives = 5;
-        console.log("1");
+        //console.log("1");
         break;
       case "2":
         timeGame = 120;
         myPacman.lives = 3;
-        console.log("2");
+        //console.log("2");
         break;
       case "3":
         timeGame = 90;
         myPacman.lives = 1;
-        console.log("3");
+        //console.log("3");
         break;
       default:
 
@@ -252,7 +255,7 @@ const s = ( sketch ) => {
       if(sketch.frameCount % fr == 0 && timeGame != 0) {
         timeGame--;
       }
-    }    
+    }
     sketch.text(timeGame, 730, 825);
     sketch.textSize(14);
     sketch.text("© Game Created By Eric Quintana", 300, 850);
@@ -285,8 +288,8 @@ const s = ( sketch ) => {
     }
 
     if(timeGame > 0){
-      //if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
-      if(myPacman.lives > 0 && myPacman.score >= 100){
+      if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
+      //if(myPacman.lives > 0 && myPacman.score >= 100){
         mySoundWinGame.play();
         let miss = "Enhorabona has guanyat " + user + "!!\nEmail = " + email + "\nDificultat = " + difMode(dificultat) + "\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
         var continuar = confirm(miss);
