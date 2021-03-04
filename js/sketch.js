@@ -24,9 +24,9 @@ const s = ( sketch ) => {
   var mySoundEat;
   var url = window.location.search;
   var urlParams = new URLSearchParams(url);
-  var dif = urlParams.get('dif');
-  var user = urlParams.get("user");
-  var email = urlParams.get('email');
+  var nomUsuariK = localStorage.getItem("nomUsuariKey");
+  var emailK = localStorage.getItem("emailKey");
+  var difK = localStorage.getItem("difKey");
 
   sketch.preload = function() {
     rockImage = sketch.loadImage('image/rock.jpg');
@@ -44,36 +44,44 @@ const s = ( sketch ) => {
     mySoundStartGame = sketch.loadSound('assets/Intro.mp3');
     mySoundEat = sketch.loadSound('assets/Fruit.mp3');
     mySoundMove = sketch.loadSound('assets/Chomp.mp3');
+    userNull();
+  }
+
+  function userNull(){
+    if(nomUsuariK==""){
+      alert("Introdueix un usuari per iniciar el joc!!");
+      window.history.back();
+    }
   }
 
   sketch.setup = function() {
     sketch.createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage + HEIGHT_TEXT);
     sketch.frameRate(fr); // Attempt to refresh at starting FPS
-
+    console.log(nomUsuariK + " / " + emailK + " / " + difK);
     startGame();
   };
 
   function startGame(){
-    switch (dif) {
+    switch (difK) {
       case "0":
         timeGame = 300;
         myPacman.lives = 10;
-        console.log("0");
+        //console.log("0");
         break;
       case "1":
         timeGame = 180;
         myPacman.lives = 5;
-        console.log("1");
+        //console.log("1");
         break;
       case "2":
         timeGame = 120;
         myPacman.lives = 3;
-        console.log("2");
+        //console.log("2");
         break;
       case "3":
         timeGame = 90;
         myPacman.lives = 1;
-        console.log("3");
+        //console.log("3");
         break;
       default:
 
@@ -215,7 +223,7 @@ const s = ( sketch ) => {
   }
 
   function difMode(dificultat){
-    switch (dif) {
+    switch (difK) {
       case "0":
         dificultat = "Mode Easy";
         break;
@@ -252,7 +260,7 @@ const s = ( sketch ) => {
       if(sketch.frameCount % fr == 0 && timeGame != 0) {
         timeGame--;
       }
-    }    
+    }
     sketch.text(timeGame, 730, 825);
     sketch.textSize(14);
     sketch.text("© Game Created By Eric Quintana", 300, 850);
@@ -275,20 +283,18 @@ const s = ( sketch ) => {
 
   function playerWin() {
     let dificultat;
-
-    if(user == ""){
-      user = "Anonymous";
+    if(nomUsuariK == ""){
+      nomUsuariK = "Anonymous";
     }
-
-    if(email == ""){
-      email = "anonymous@randomail.pacman"
+    if(emailK == ""){
+      emailK = "anonymous@randomail.pacman"
     }
 
     if(timeGame > 0){
       //if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
       if(myPacman.lives > 0 && myPacman.score >= 100){
         mySoundWinGame.play();
-        let miss = "Enhorabona has guanyat " + user + "!!\nEmail = " + email + "\nDificultat = " + difMode(dificultat) + "\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
+        let miss = "Enhorabona has guanyat " + nomUsuariK + "!!\nEmail = " + emailK + "\nDificultat = " + difMode(dificultat) + "\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
         var continuar = confirm(miss);
         if(continuar == true){
           sketch.noLoop();
