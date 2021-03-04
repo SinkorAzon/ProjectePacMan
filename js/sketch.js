@@ -24,9 +24,6 @@ const s = ( sketch ) => {
   var mySoundEat;
   var url = window.location.search;
   var urlParams = new URLSearchParams(url);
-  var dif = urlParams.get('dif');
-  var user = urlParams.get("user");
-  var email = urlParams.get('email');
   var nomUsuariK = localStorage.getItem("nomUsuariKey");
   var emailK = localStorage.getItem("emailKey");
   var difK = localStorage.getItem("difKey");
@@ -47,6 +44,14 @@ const s = ( sketch ) => {
     mySoundStartGame = sketch.loadSound('assets/Intro.mp3');
     mySoundEat = sketch.loadSound('assets/Fruit.mp3');
     mySoundMove = sketch.loadSound('assets/Chomp.mp3');
+    userNull();
+  }
+
+  function userNull(){
+    if(nomUsuariK==""){
+      alert("Introdueix un usuari per iniciar el joc!!");
+      window.history.back();
+    }
   }
 
   sketch.setup = function() {
@@ -57,7 +62,7 @@ const s = ( sketch ) => {
   };
 
   function startGame(){
-    switch (dif) {
+    switch (difK) {
       case "0":
         timeGame = 300;
         myPacman.lives = 10;
@@ -218,7 +223,7 @@ const s = ( sketch ) => {
   }
 
   function difMode(dificultat){
-    switch (dif) {
+    switch (difK) {
       case "0":
         dificultat = "Mode Easy";
         break;
@@ -278,20 +283,18 @@ const s = ( sketch ) => {
 
   function playerWin() {
     let dificultat;
-
-    if(user == ""){
-      user = "Anonymous";
+    if(nomUsuariK == ""){
+      nomUsuariK = "Anonymous";
     }
-
-    if(email == ""){
-      email = "anonymous@randomail.pacman"
+    if(emailK == ""){
+      emailK = "anonymous@randomail.pacman"
     }
 
     if(timeGame > 0){
-      if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
-      //if(myPacman.lives > 0 && myPacman.score >= 100){
+      //if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
+      if(myPacman.lives > 0 && myPacman.score >= 100){
         mySoundWinGame.play();
-        let miss = "Enhorabona has guanyat " + user + "!!\nEmail = " + email + "\nDificultat = " + difMode(dificultat) + "\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
+        let miss = "Enhorabona has guanyat " + nomUsuariK + "!!\nEmail = " + emailK + "\nDificultat = " + difMode(dificultat) + "\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
         var continuar = confirm(miss);
         if(continuar == true){
           sketch.noLoop();
