@@ -38,6 +38,7 @@ function saveUser(){
   var user = document.getElementById("user").value;
   var email = document.getElementById("email").value;
   var dif;
+
   if(document.getElementById("easy").checked == true) {
     dif = document.getElementById("easy").value;
   } else if(document.getElementById("stan").checked == true) {
@@ -53,4 +54,5 @@ function saveUser(){
   localStorage.setItem('nomUsuariKey', user);
   localStorage.setItem('emailKey', email);
   localStorage.setItem('difKey', dif);
+  localStorage.setItem('myArray', "");
 }
