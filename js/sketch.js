@@ -27,6 +27,7 @@ const s = ( sketch ) => {
   var nomUsuariK = localStorage.getItem("nomUsuariKey");
   var emailK = localStorage.getItem("emailKey");
   var difK = localStorage.getItem("difKey");
+  var arrayJugadorK = localStorage.getItem('myArray');
 
   sketch.preload = function() {
     rockImage = sketch.loadImage('image/rock.jpg');
@@ -58,6 +59,8 @@ const s = ( sketch ) => {
     sketch.createCanvas(myGame.columns * myGame.sizeImage, myGame.rows * myGame.sizeImage + HEIGHT_TEXT);
     sketch.frameRate(fr); // Attempt to refresh at starting FPS
     console.log(nomUsuariK + " / " + emailK + " / " + difK);
+    console.log(arrayJugadorK);
+
     startGame();
   };
 
@@ -283,9 +286,6 @@ const s = ( sketch ) => {
 
   function playerWin() {
     let dificultat;
-    if(nomUsuariK == ""){
-      nomUsuariK = "Anonymous";
-    }
     if(emailK == ""){
       emailK = "anonymous@randomail.pacman"
     }
@@ -294,17 +294,28 @@ const s = ( sketch ) => {
       //if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
       if(myPacman.lives > 0 && myPacman.score >= 100){
         mySoundWinGame.play();
+
         let miss = "Enhorabona has guanyat " + nomUsuariK + "!!\nEmail = " + emailK + "\nDificultat = " + difMode(dificultat) + "\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
         var continuar = confirm(miss);
         if(continuar == true){
           sketch.noLoop();
           mySoundStartGame.addCue(mySoundStartGame.duration() - 0.01, restartGame);
+          saveJugador();
           restartGame();
         } else {
           window.history.back();
         }
       }
     }
+  }
+
+  function saveJugador(){
+    let dificultat;
+    var arrayJugador = [];
+    let strJugador = nomUsuariK + "," + emailK + "," + difMode(dificultat) + "," + timeGame + "," + myPacman.score;
+
+    arrayJugador.push(strJugador);
+    localStorage.setItem('myArray', arrayJugador);
   }
 
   function restartGame(){
