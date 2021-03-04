@@ -291,8 +291,8 @@ const s = ( sketch ) => {
     }
 
     if(timeGame > 0){
-      //if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
-      if(myPacman.lives > 0 && myPacman.score >= 100){
+      if(myPacman.lives > 0 && arrayFoodMaze == 0 && arrayPacdotMaze == 0){
+      //if(myPacman.lives > 0 && myPacman.score >= 100){
         mySoundWinGame.play();
 
         let miss = "Enhorabona has guanyat " + nomUsuariK + "!!\nEmail = " + emailK + "\nDificultat = " + difMode(dificultat) + "\nTemps Restant = " + timeGame + "\nVides Restants = " + myPacman.lives + "\nPunts Totals = " + myPacman.score + "\nPrem Ok per tornar a Jugar o Cancel per Sortir.";
